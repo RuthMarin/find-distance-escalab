@@ -1,0 +1,230 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
+
+  .card svg.material-icons path {
+    fill: #888;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .card {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    height: 40px;
+    width: 200px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+  }
+
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .card.card-small {
+    height: 16px;
+    width: 168px;
+  }
+
+
+  .card.highlight-card {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+  }
+
+  .card.card.highlight-card span {
+    margin-left: 60px;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+  .inputStyle{
+    margin-bottom: 15px;
+    padding-left: 8px;
+
+  }
+  .iconStyle{
+    font-size:16px;
+    margin-right: 2%
+    
+  }
+  .textIcon{
+    text-align: center; 
+    margin-bottom: 10px; 
+    padding-right: 10px
+
+  }
+
+
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+</div>
+
+<div class="content" role="main">
+
+  <!-- Resources -->
+  <h2>App Find Distance</h2>
+  <p style="padding-left: 10px">Calcular la distancia lineal entre dos posiciones dadas la latitud y longitud</p>
+  <button (click)="home()" type="submit" class="btn btn-secondary" *ngIf="!start" style="margin-top: 10px">Consultar distancia</button>
+
+
+  <input type="hidden" #selection>
+
+  <div class="card-container" *ngIf="start">
+    <div class="card" (click)="selection.value = 'component'" style="width: 100%; height: 100%; display: block ruby"> 
+        <form [formGroup]="form" (ngSubmit)="distanceFunction()" style="display: inline-grid!important;">
+                 <span class="textIcon"><i class="fas fas fa-map-marker-alt iconStyle" style="color:green"></i>Origen</span>            
+            <label>
+                <span style="margin-right: 6px;">Dirección:</span>
+                <input type="text" formControlName="origin_address" class="inputStyle" placeholder="pasaje 123" required>
+            </label>
+            <label>
+                <span style="margin-right: 12px;">Comuna:</span>
+                <input type="text" formControlName="origin_city" class="inputStyle" placeholder="Santiago" required>
+            </label>
+            <label>
+                <span style="margin-right: 38px;">Pais:</span>
+                <input type="text" formControlName="origin_country" class="inputStyle" placeholder="Chile" required>
+            </label>
+                 <span class="textIcon"><i class="fas fas fa-map-marker-alt iconStyle " style="color:red"></i>Destino</span>
+            <label>
+                <span style="margin-right: 6px;">Dirección:</span>
+                <input type="text" formControlName="destination_address" class="inputStyle" placeholder="pasaje 123" required>
+            </label>
+            <label>
+                <span style="margin-right: 12px;">Comuna:</span>
+                <input type="text" formControlName="destination_city" class="inputStyle" placeholder="Santiago" required>
+            </label>
+            <label>
+                <span style="margin-right: 38px;">Pais:</span>
+                <input type="text" formControlName="destination_country" class="inputStyle" placeholder="Chile" required>
+            </label>
+
+            <button type="submit" class="btn btn-primary">Calcular</button>
+        </form>
+    </div>
+</div>
+
+<div class="card-container" *ngIf="start" style="display: contents; margin-bottom: 10px">
+    {{distance}} 
+</div>
+
+<div style="margin-top: 10px"><button (click)="change()" *ngIf="start" class="btn btn-secondary">Ver Consultas</button></div>
+
+
+<div style="padding: inherit; margin-top:10px;" *ngIf="!start" >
+    <div *ngFor="let objeto of record_" >
+         <div style="display:list-item;">{{objeto}}</div>
+    </div>
+          
+</div>
+
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<router-outlet></router-outlet>
